@@ -242,6 +242,13 @@ prompt_aws() {
   esac
 }
 
+prompt_tf() {
+  if [[ -d .terraform ]] && [[ "$PWD" != ~ ]]; then
+    workspace=$(terraform workspace show 2> /dev/null) || return
+    prompt_segment white black "⛏  ${workspace}"
+  fi
+}
+
 ## Main prompt
 build_prompt() {
   RETVAL=$?
@@ -253,6 +260,7 @@ build_prompt() {
   prompt_git
   prompt_bzr
   prompt_hg
+  prompt_tf
   prompt_end
 }
 
