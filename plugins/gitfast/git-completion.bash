@@ -1238,6 +1238,22 @@ _git_bundle ()
 	esac
 }
 
+_git_switch()
+{
+	case "$cur" in
+	--*)
+		__gitcomp "--create"
+		return
+		;;
+	-*)
+		__gitcomp "-c"
+		return
+		;;
+	*)
+		__git_complete_refs
+	esac
+}
+
 _git_checkout ()
 {
 	__git_has_doubledash && return
